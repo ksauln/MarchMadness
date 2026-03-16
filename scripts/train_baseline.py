@@ -18,8 +18,15 @@ from march_madness.config import ARTIFACTS_DIR, DIVISION_LABELS, DIVISIONS, ensu
 from march_madness.data.external import build_espn_bracket_games
 from march_madness.evaluation.season_cv import run_rolling_season_cv
 from march_madness.features.matchup_builder import build_tournament_training_frame, matchup_feature_columns
-from march_madness.features.team_aggregates import build_team_features
-from march_madness.inference.submission import generate_division_submission, save_feature_table, save_metrics_table, save_model_bundle, save_submission
+from march_madness.features.team_aggregates import build_team_features, build_top25_context
+from march_madness.inference.submission import (
+    generate_division_submission,
+    save_feature_table,
+    save_metrics_table,
+    save_model_bundle,
+    save_submission,
+    save_top25_context_table,
+)
 from march_madness.models.baseline import build_model_bundle, fit_candidate_models
 from march_madness.simulation import run_bracket_simulation, save_bracket_games
 
@@ -38,6 +45,7 @@ def run(stage: int, min_train_seasons: int, random_state: int, refresh_external:
         print(f"[{DIVISION_LABELS[division]}] building team features")
         team_features = build_team_features(division)
         save_feature_table(division, team_features)
+        save_top25_context_table(division, build_top25_context(division, team_features))
 
         print(f"[{DIVISION_LABELS[division]}] building tournament training frame")
         training_frame = build_tournament_training_frame(division, team_features)

@@ -111,6 +111,32 @@ def compute_massey_features() -> pd.DataFrame:
     return features
 
 
+def build_top25_context(division: str, team_features: pd.DataFrame) -> pd.DataFrame:
+    rankings = (
+        team_features[["season", "team_id", "elo_rating"]]
+        .sort_values(["season", "elo_rating", "team_id"], ascending=[True, False, True])
+        .groupby("season", group_keys=False)
+        .head(25)
+        .rename(columns={"team_id": "opp_team_id"})
+    )
+    rankings["is_top25_elo"] = 1
+
+    long_games = build_regular_season_long(division)
+    top25_games = long_games.merge(
+        rankings[["season", "opp_team_id", "is_top25_elo"]],
+        on=["season", "opp_team_id"],
+        how="left",
+    )
+    top25_games = top25_games[top25_games["is_top25_elo"] == 1]
+    if top25_games.empty:
+        return pd.DataFrame(columns=["season", "team_id", "top25_elo_wins", "top25_elo_games"])
+    return (
+        top25_games.groupby(["season", "team_id"], sort=True)
+        .agg(top25_elo_wins=("is_win", "sum"), top25_elo_games=("is_win", "size"))
+        .reset_index()
+    )
+
+
 def build_team_features(division: str) -> pd.DataFrame:
     long_games = build_regular_season_long(division)
 

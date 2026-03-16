@@ -13,9 +13,15 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 from march_madness.config import ARTIFACTS_DIR, DIVISION_LABELS
-from march_madness.data.canonicalize import build_regular_season_long
 from march_madness.inference.predict import predict_single_matchup
-from march_madness.inference.submission import feature_table_path, load_feature_table, load_model_bundle, metrics_path, model_bundle_path
+from march_madness.inference.submission import (
+    feature_table_path,
+    load_feature_table,
+    load_model_bundle,
+    load_top25_context_table,
+    metrics_path,
+    model_bundle_path,
+)
 from march_madness.simulation import bracket_games_path, bracket_simulation_path
 from march_madness.ui.presentation import build_matchup_pick, build_upset_signal
 
@@ -183,30 +189,7 @@ def _top_feature_diffs(frame: pd.DataFrame) -> pd.DataFrame:
 
 @st.cache_data
 def load_top25_context(division: str) -> pd.DataFrame:
-    team_features = load_team_features(division)
-    rankings = (
-        team_features[["season", "team_id", "elo_rating"]]
-        .sort_values(["season", "elo_rating", "team_id"], ascending=[True, False, True])
-        .groupby("season", group_keys=False)
-        .head(25)
-        .rename(columns={"team_id": "opp_team_id"})
-    )
-    rankings["is_top25_elo"] = 1
-
-    long_games = build_regular_season_long(division)
-    top25_games = long_games.merge(
-        rankings[["season", "opp_team_id", "is_top25_elo"]],
-        on=["season", "opp_team_id"],
-        how="left",
-    )
-    top25_games = top25_games[top25_games["is_top25_elo"] == 1]
-    if top25_games.empty:
-        return pd.DataFrame(columns=["season", "team_id", "top25_elo_wins", "top25_elo_games"])
-    return (
-        top25_games.groupby(["season", "team_id"], sort=True)
-        .agg(top25_elo_wins=("is_win", "sum"), top25_elo_games=("is_win", "size"))
-        .reset_index()
-    )
+    return load_top25_context_table(division)
 
 
 def _format_pct(value: float | int | None, digits: int = 1) -> str:

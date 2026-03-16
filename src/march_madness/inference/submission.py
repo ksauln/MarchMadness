@@ -19,6 +19,10 @@ def feature_table_path(division: str) -> Path:
     return ARTIFACTS_DIR / "features" / f"{division.lower()}_team_features.csv"
 
 
+def top25_context_path(division: str) -> Path:
+    return ARTIFACTS_DIR / "features" / f"{division.lower()}_top25_context.csv"
+
+
 def metrics_path(division: str) -> Path:
     return ARTIFACTS_DIR / "metrics" / f"{division.lower()}_cv_metrics.csv"
 
@@ -35,8 +39,19 @@ def save_feature_table(division: str, team_features: pd.DataFrame) -> None:
     team_features.to_csv(feature_table_path(division), index=False)
 
 
+def save_top25_context_table(division: str, top25_context: pd.DataFrame) -> None:
+    top25_context.to_csv(top25_context_path(division), index=False)
+
+
 def load_feature_table(division: str) -> pd.DataFrame:
     return pd.read_csv(feature_table_path(division))
+
+
+def load_top25_context_table(division: str) -> pd.DataFrame:
+    path = top25_context_path(division)
+    if not path.exists():
+        return pd.DataFrame(columns=["season", "team_id", "top25_elo_wins", "top25_elo_games"])
+    return pd.read_csv(path)
 
 
 def save_metrics_table(division: str, metrics_frame: pd.DataFrame) -> None:
