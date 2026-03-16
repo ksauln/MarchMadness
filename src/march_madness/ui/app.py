@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import html
 import json
 import sys
 from pathlib import Path
@@ -23,6 +24,7 @@ from march_madness.inference.submission import (
     model_bundle_path,
 )
 from march_madness.simulation import bracket_games_path, bracket_simulation_path
+from march_madness.ui.bracket import BRACKET_VARIANTS, build_bracket_variant, render_bracket_svg
 from march_madness.ui.presentation import build_matchup_pick, build_upset_signal
 
 
@@ -88,6 +90,74 @@ def _load_css() -> None:
           font-size: 1.8rem;
           font-weight: 700;
           color: var(--accent-2);
+        }
+        .metric-card {
+          background: var(--paper);
+          border: 1px solid var(--line);
+          border-radius: 22px;
+          padding: 1rem 1.1rem;
+          box-shadow: 0 12px 40px rgba(24, 33, 27, 0.08);
+          min-height: 9.5rem;
+        }
+        .metric-card--decision {
+          min-height: 11rem;
+        }
+        .metric-label {
+          color: var(--muted);
+          text-transform: uppercase;
+          font-size: 0.72rem;
+          letter-spacing: 0.08em;
+          font-weight: 700;
+        }
+        .metric-label-row {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+          margin-bottom: 0.45rem;
+        }
+        .metric-help {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 1.15rem;
+          height: 1.15rem;
+          border: 1px solid rgba(24, 33, 27, 0.28);
+          border-radius: 999px;
+          color: var(--muted);
+          font-size: 0.75rem;
+          font-weight: 700;
+          cursor: help;
+          flex-shrink: 0;
+        }
+        .metric-value {
+          color: var(--ink);
+          font-size: clamp(2rem, 2.5vw, 3.2rem);
+          line-height: 1.04;
+          font-weight: 700;
+          overflow-wrap: anywhere;
+        }
+        .metric-value--decision {
+          font-size: clamp(1.6rem, 2vw, 2.6rem);
+        }
+        .metric-delta {
+          margin-top: 0.7rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          max-width: 100%;
+          padding: 0.3rem 0.7rem;
+          border-radius: 999px;
+          background: rgba(21, 71, 52, 0.12);
+          color: var(--accent-2);
+          font-size: 0.95rem;
+          font-weight: 600;
+          line-height: 1.25;
+          white-space: normal;
+          overflow-wrap: anywhere;
+        }
+        .metric-delta--neutral {
+          background: rgba(95, 103, 95, 0.12);
+          color: var(--muted);
         }
         .subtle {
           color: var(--muted);
@@ -170,8 +240,27 @@ def load_submission_snapshot() -> pd.DataFrame:
     return pd.read_csv(path)
 
 
+def _required_runtime_artifacts() -> list[Path]:
+    required = [ARTIFACTS_DIR / "metrics" / "training_summary.json", ARTIFACTS_DIR / "submissions" / "stage2_baseline_submission.csv"]
+    for division in ("M", "W"):
+        required.extend(
+            [
+                model_bundle_path(division),
+                feature_table_path(division),
+                metrics_path(division),
+                bracket_simulation_path(division),
+                bracket_games_path(division),
+            ]
+        )
+    return required
+
+
+def _missing_runtime_artifacts() -> list[Path]:
+    return [path for path in _required_runtime_artifacts() if not path.exists()]
+
+
 def _artifacts_ready() -> bool:
-    return all(model_bundle_path(division).exists() and feature_table_path(division).exists() for division in ("M", "W"))
+    return not _missing_runtime_artifacts()
 
 
 def _top_feature_diffs(frame: pd.DataFrame) -> pd.DataFrame:
@@ -202,6 +291,42 @@ def _format_number(value: float | int | None, digits: int = 1) -> str:
     if pd.isna(value):
         return "N/A"
     return f"{float(value):.{digits}f}"
+
+
+def _render_metric_card(
+    label: str,
+    value: str,
+    *,
+    delta: str | None = None,
+    help_text: str | None = None,
+    decision: bool = False,
+    neutral_delta: bool = False,
+) -> None:
+    value_class = "metric-value metric-value--decision" if decision else "metric-value"
+    card_class = "metric-card metric-card--decision" if decision else "metric-card"
+    label_markup = f'<div class="metric-label">{html.escape(label)}</div>'
+    if help_text:
+        escaped_help = html.escape(help_text, quote=True)
+        label_markup = (
+            '<div class="metric-label-row">'
+            f'<div class="metric-label">{html.escape(label)}</div>'
+            f'<span class="metric-help" title="{escaped_help}" aria-label="{escaped_help}">?</span>'
+            "</div>"
+        )
+    delta_markup = ""
+    if delta:
+        delta_class = "metric-delta metric-delta--neutral" if neutral_delta else "metric-delta"
+        delta_markup = f'<div class="{delta_class}">{html.escape(delta)}</div>'
+    st.markdown(
+        f"""
+        <div class="{card_class}">
+          {label_markup}
+          <div class="{value_class}">{html.escape(value)}</div>
+          {delta_markup}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def _team_snapshot(
@@ -321,7 +446,14 @@ st.set_page_config(page_title="March Madness Predictor", layout="wide")
 _load_css()
 
 if not _artifacts_ready():
-    st.error("Model artifacts are missing. Run `./.venv/bin/python scripts/train_baseline.py --stage 2 --refresh-external` first.")
+    missing_artifacts = [path.relative_to(ROOT).as_posix() for path in _missing_runtime_artifacts()]
+    st.error(
+        "Runtime artifacts are missing from this checkout. Streamlit Community Cloud can only serve files committed to the repo, so the app cannot fully load until these files exist."
+    )
+    st.markdown("Missing files:")
+    st.code("\n".join(missing_artifacts))
+    st.markdown("To regenerate them locally before deploying:")
+    st.code("./.venv/bin/python scripts/train_baseline.py --stage 2 --refresh-external", language="bash")
     st.stop()
 
 division = st.sidebar.selectbox("Division", options=["M", "W"], format_func=lambda value: DIVISION_LABELS[value])
@@ -330,6 +462,7 @@ top25_context = load_top25_context(division)
 model_bundle = load_model(division)
 metrics = load_metrics(division)
 simulation = load_bracket_simulation(division)
+bracket_games = load_bracket_games(division)
 summary = load_training_summary().get("divisions", {}).get(division, {})
 submission_snapshot = load_submission_snapshot()
 
@@ -366,7 +499,7 @@ top_row[3].markdown(
     unsafe_allow_html=True,
 )
 
-tabs = st.tabs(["Matchup Lab", "Bracket Outlook", "Model Health", "Submission Snapshot"])
+tabs = st.tabs(["Matchup Lab", "Bracket Outlook", "Bracket Builder", "Model Health", "Submission Snapshot"])
 
 with tabs[0]:
     available_seasons = sorted(team_features["season"].unique().tolist(), reverse=True)
@@ -391,11 +524,13 @@ with tabs[0]:
         if pd.notna(market_probability):
             team_one_market_probability = float(market_probability) if team_one_suffix == "a" else 1.0 - float(market_probability)
             team_two_market_probability = 1.0 - team_one_market_probability
-            sportsbook_value = f'{team_one_name if team_one_market_probability >= team_two_market_probability else team_two_name} {max(team_one_market_probability, team_two_market_probability):.1%}'
+            sportsbook_value = team_one_name if team_one_market_probability >= team_two_market_probability else team_two_name
+            sportsbook_delta = f'{max(team_one_market_probability, team_two_market_probability):.1%} implied win rate'
         else:
             team_one_market_probability = None
             team_two_market_probability = None
             sportsbook_value = "N/A"
+            sportsbook_delta = "No live odds for this matchup"
         upset = build_upset_signal(
             team_one_name=team_one_name,
             team_two_name=team_two_name,
@@ -414,41 +549,56 @@ with tabs[0]:
             team_two_market_probability=team_two_market_probability,
         )
 
-        metric_columns = st.columns(5)
-        metric_columns[0].metric(
-            label=f"{team_one_name} Win %",
-            value=f"{probability:.1%}",
-            help="Model-estimated chance that this selected team wins the matchup after any live market adjustment.",
-        )
-        metric_columns[1].metric(
-            label=f"{team_two_name} Win %",
-            value=f"{1.0 - probability:.1%}",
-            help="Model-estimated chance that this selected team wins the matchup after any live market adjustment.",
-        )
-        metric_columns[2].metric(
-            label="Sportsbook Lean",
-            value=sportsbook_value,
-            help="Live sportsbook-implied favorite and win probability, derived from ESPN odds when they are available for an official current bracket game.",
-        )
+        score_columns = st.columns(3)
+        with score_columns[0]:
+            _render_metric_card(
+                f"{team_one_name} Win %",
+                f"{probability:.1%}",
+                help_text="Model-estimated chance that this selected team wins the matchup after any live market adjustment.",
+            )
+        with score_columns[1]:
+            _render_metric_card(
+                f"{team_two_name} Win %",
+                f"{1.0 - probability:.1%}",
+                help_text="Model-estimated chance that this selected team wins the matchup after any live market adjustment.",
+            )
+        with score_columns[2]:
+            _render_metric_card(
+                "Sportsbook Lean",
+                sportsbook_value,
+                delta=sportsbook_delta,
+                help_text="Live sportsbook-implied favorite and win probability, derived from ESPN odds when they are available for an official current bracket game.",
+                neutral_delta=sportsbook_value == "N/A",
+            )
+
+        decision_columns = st.columns(2)
         if upset["flagged"]:
-            metric_columns[3].metric(
-                label="Upset Flag",
-                value=upset["level"],
-                delta=f'{upset["team"]} at {float(upset["win_probability"]):.1%}',
-                help="Heuristic flag for a lower-seeded team that still has a credible path to win based on the model and seed gap.",
-            )
+            with decision_columns[0]:
+                _render_metric_card(
+                    "Upset Flag",
+                    upset["level"],
+                    delta=f'{upset["team"]} at {float(upset["win_probability"]):.1%}',
+                    help_text="Heuristic flag for a lower-seeded team that still has a credible path to win based on the model and seed gap.",
+                    decision=True,
+                )
         else:
-            metric_columns[3].metric(
-                label="Upset Flag",
-                value="No signal",
-                help="Heuristic flag for a lower-seeded team that still has a credible path to win based on the model and seed gap.",
+            with decision_columns[0]:
+                _render_metric_card(
+                    "Upset Flag",
+                    "No signal",
+                    delta="No seed-based upset trigger",
+                    help_text="Heuristic flag for a lower-seeded team that still has a credible path to win based on the model and seed gap.",
+                    decision=True,
+                    neutral_delta=True,
+                )
+        with decision_columns[1]:
+            _render_metric_card(
+                "Bracket Pick",
+                pick["team"],
+                delta=f'{pick["strategy"]} at {float(pick["probability"]):.1%}',
+                help_text="Suggested pick for bracket selection. This can favor a credible upset instead of simply following the highest raw win probability.",
+                decision=True,
             )
-        metric_columns[4].metric(
-            label="Bracket Pick",
-            value=pick["team"],
-            delta=f'{pick["strategy"]} at {float(pick["probability"]):.1%}',
-            help="Suggested pick for bracket selection. This can favor a credible upset instead of simply following the highest raw win probability.",
-        )
 
         chips = []
         if pd.notna(matchup_frame.iloc[0].get("seed_num_a")):
@@ -524,6 +674,31 @@ with tabs[1]:
                 st.dataframe(official_display, width="stretch", hide_index=True)
 
 with tabs[2]:
+    if bracket_games.empty:
+        st.info("Live bracket slots are not available yet.")
+    else:
+        st.subheader("Bracket Builder")
+        bracket_variant_key = st.selectbox(
+            "Bracket version",
+            options=list(BRACKET_VARIANTS.keys()),
+            format_func=lambda key: BRACKET_VARIANTS[key]["label"],
+        )
+        bracket_variant = build_bracket_variant(
+            division=division,
+            games=bracket_games,
+            team_features=team_features,
+            model_bundle=model_bundle,
+            simulation=simulation,
+            variant_key=bracket_variant_key,
+        )
+        st.markdown(
+            f'<div class="panel-card"><div class="kpi-label">Variant Logic</div><div class="subtle">{html.escape(BRACKET_VARIANTS[bracket_variant_key]["description"])}</div></div>',
+            unsafe_allow_html=True,
+        )
+        st.caption("Scroll horizontally on smaller screens. Early-round model percentages are hidden unless the pick logic meaningfully differs from straight chalk.")
+        st.markdown(render_bracket_svg(DIVISION_LABELS[division], bracket_variant), unsafe_allow_html=True)
+
+with tabs[3]:
     st.subheader("Rolling Validation")
     if not metrics.empty:
         chart_data = metrics.sort_values("season").set_index("season")[["brier_score", "log_loss", "accuracy"]]
@@ -532,7 +707,7 @@ with tabs[2]:
     else:
         st.info("Validation metrics are not available.")
 
-with tabs[3]:
+with tabs[4]:
     if submission_snapshot.empty:
         st.info("No submission artifact was found.")
     else:

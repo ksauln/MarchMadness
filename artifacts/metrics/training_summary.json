@@ -40,10 +40,11 @@
       },
       "calibration_strategy": "platt_logit",
       "market_weight": 0.2,
+      "n_simulations": 500000,
       "avg_brier_score": 0.1894431472129686,
       "avg_log_loss": 0.5568706921834997,
       "sim_title_favorite": "Duke",
-      "sim_title_probability": 0.1665
+      "sim_title_probability": 0.172178
     },
     "W": {
       "training_rows": 1922,
@@ -77,6 +78,7 @@
       },
       "calibration_strategy": "platt_logit",
       "market_weight": 0.2,
+      "n_simulations": 10000,
       "avg_brier_score": 0.1490497294113011,
       "avg_log_loss": 0.4478561358580729,
       "sim_title_favorite": "Connecticut",

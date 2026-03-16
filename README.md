@@ -33,6 +33,15 @@ Train models, refresh live bracket data, generate artifacts:
 .venv/bin/python scripts/train_baseline.py --stage 2 --refresh-external
 ```
 
+Default simulation counts during training:
+- Men: `500,000`
+- Women: `10,000`
+
+Optional overrides:
+```bash
+.venv/bin/python scripts/train_baseline.py --stage 2 --men-n-simulations 500000 --women-n-simulations 10000
+```
+
 Generate a submission from saved artifacts:
 ```bash
 .venv/bin/python scripts/generate_submission.py --stage 2
@@ -49,13 +58,16 @@ Run tests:
 ```
 
 ## Community Cloud Deploy
-This repo now includes a root [app.py](/Users/kyle/Documents/MyProjects/MarchMadness/app.py) entrypoint and a root [requirements.txt](/Users/kyle/Documents/MyProjects/MarchMadness/requirements.txt) so it is ready for Streamlit Community Cloud.
+This repo includes a root [app.py](/Users/kyle/Documents/MyProjects/MarchMadness/app.py) entrypoint plus a root [requirements.txt](/Users/kyle/Documents/MyProjects/MarchMadness/requirements.txt) with explicit runtime dependencies so the app can be deployed directly on Streamlit Community Cloud.
 
-Recommended deploy shape:
+Recommended deploy flow:
 - Commit the app code and the generated [artifacts](/Users/kyle/Documents/MyProjects/MarchMadness/artifacts) directory.
 - Do not commit raw Kaggle training data in [Data](/Users/kyle/Documents/MyProjects/MarchMadness/Data); the deployed app does not need it.
-- Use `app.py` as the Streamlit entrypoint.
-- Let Community Cloud install dependencies from `requirements.txt`.
+- In Streamlit Community Cloud, point the app to `app.py`.
+- Let Community Cloud install dependencies from [requirements.txt](/Users/kyle/Documents/MyProjects/MarchMadness/requirements.txt).
+- Use a Python runtime compatible with [pyproject.toml](/Users/kyle/Documents/MyProjects/MarchMadness/pyproject.toml) (`>=3.11`).
+
+If the deploy boots without the committed runtime artifacts, the app now reports the exact missing files under [artifacts](/Users/kyle/Documents/MyProjects/MarchMadness/artifacts) so the failure is actionable.
 
 Local deploy-equivalent smoke test:
 ```bash
@@ -87,7 +99,7 @@ Local deploy-equivalent smoke test:
 - Live market context for official current bracket games
 
 ## Streamlit App
-The app is at [src/march_madness/ui/app.py](/Users/kyle/Documents/MyProjects/MarchMadness/src/march_madness/ui/app.py) and currently exposes four tabs:
+The app is at [src/march_madness/ui/app.py](/Users/kyle/Documents/MyProjects/MarchMadness/src/march_madness/ui/app.py) and currently exposes five tabs:
 
 - `Matchup Lab`
   - Compare any two teams from a selected season
@@ -97,6 +109,9 @@ The app is at [src/march_madness/ui/app.py](/Users/kyle/Documents/MyProjects/Mar
 - `Bracket Outlook`
   - See simulated title odds and advancement rates
   - Review official live bracket games with model probabilities and upset-watch labels
+- `Bracket Builder`
+  - Render a full filled-in tournament bracket in-app
+  - Switch among four deterministic bracket variants: `Model Only`, `Likely Upsets`, `Market Consensus`, and `Title Equity`
 - `Model Health`
   - Inspect rolling validation metrics
 - `Submission Snapshot`

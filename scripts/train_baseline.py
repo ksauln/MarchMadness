@@ -31,7 +31,28 @@ from march_madness.models.baseline import build_model_bundle, fit_candidate_mode
 from march_madness.simulation import run_bracket_simulation, save_bracket_games
 
 
-def run(stage: int, min_train_seasons: int, random_state: int, refresh_external: bool, n_simulations: int) -> dict[str, object]:
+def _division_simulation_count(
+    division: str,
+    default_n_simulations: int,
+    men_n_simulations: int | None,
+    women_n_simulations: int | None,
+) -> int:
+    if division == "M":
+        return men_n_simulations if men_n_simulations is not None else 500_000
+    if division == "W" and women_n_simulations is not None:
+        return women_n_simulations
+    return default_n_simulations
+
+
+def run(
+    stage: int,
+    min_train_seasons: int,
+    random_state: int,
+    refresh_external: bool,
+    n_simulations: int,
+    men_n_simulations: int | None = None,
+    women_n_simulations: int | None = None,
+) -> dict[str, object]:
     ensure_artifact_dirs()
     feature_columns = matchup_feature_columns()
     combined_submissions: list[pd.DataFrame] = []
@@ -79,11 +100,17 @@ def run(stage: int, min_train_seasons: int, random_state: int, refresh_external:
         combined_submissions.append(submission_frame)
 
         print(f"[{DIVISION_LABELS[division]}] running bracket simulation")
+        division_n_simulations = _division_simulation_count(
+            division,
+            default_n_simulations=n_simulations,
+            men_n_simulations=men_n_simulations,
+            women_n_simulations=women_n_simulations,
+        )
         bracket_simulation = run_bracket_simulation(
             division,
             bundle,
             team_features,
-            n_simulations=n_simulations,
+            n_simulations=division_n_simulations,
             market_weight=bundle["market_weight"],
             refresh_external=False,
         )
@@ -96,6 +123,7 @@ def run(stage: int, min_train_seasons: int, random_state: int, refresh_external:
             "selected_configs": selected_configs,
             "calibration_strategy": bundle["calibration_strategy"],
             "market_weight": float(bundle["market_weight"]),
+            "n_simulations": int(division_n_simulations),
             "avg_brier_score": float(metrics_frame["brier_score"].mean()) if not metrics_frame.empty else None,
             "avg_log_loss": float(metrics_frame["log_loss"].mean()) if not metrics_frame.empty else None,
             "sim_title_favorite": str(bracket_simulation.iloc[0]["team_name"]) if not bracket_simulation.empty else None,
@@ -119,6 +147,8 @@ def main() -> None:
     parser.add_argument("--random-state", type=int, default=42)
     parser.add_argument("--refresh-external", action="store_true")
     parser.add_argument("--n-simulations", type=int, default=10000)
+    parser.add_argument("--men-n-simulations", type=int, default=None)
+    parser.add_argument("--women-n-simulations", type=int, default=None)
     args = parser.parse_args()
     run(
         stage=args.stage,
@@ -126,6 +156,8 @@ def main() -> None:
         random_state=args.random_state,
         refresh_external=args.refresh_external,
         n_simulations=args.n_simulations,
+        men_n_simulations=args.men_n_simulations,
+        women_n_simulations=args.women_n_simulations,
     )
 
 

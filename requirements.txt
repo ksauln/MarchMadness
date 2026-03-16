@@ -1,1 +1,6 @@
--e .
+joblib>=1.4
+numpy>=2.0
+pandas>=2.2
+scikit-learn>=1.5
+streamlit>=1.40
+xgboost>=3.0
