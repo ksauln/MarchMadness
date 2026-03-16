@@ -98,6 +98,14 @@ def _payload_path(division: str) -> Path:
     return ARTIFACTS_DIR / "external" / f"{division.lower()}_espn_bracket.json"
 
 
+def _seed_table_path(division: str) -> Path:
+    return ARTIFACTS_DIR / "external" / f"{division.lower()}_seed_table.csv"
+
+
+def _market_lines_path(division: str) -> Path:
+    return ARTIFACTS_DIR / "external" / f"{division.lower()}_market_lines.csv"
+
+
 def load_espn_bracket_payload(division: str, refresh: bool = False) -> dict:
     path = _payload_path(division)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -199,6 +207,11 @@ def _seed_numeric(seed_value: str) -> int:
 
 
 def load_seed_table(division: str, refresh: bool = False) -> pd.DataFrame:
+    path = _seed_table_path(division)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists() and not refresh:
+        return pd.read_csv(path)
+
     historical = load_tournament_seeds(division).rename(columns={"Season": "season", "TeamID": "team_id", "Seed": "seed_code"})
     historical["division"] = division
     historical["seed_num"] = historical["seed_code"].map(_seed_numeric)
@@ -227,7 +240,9 @@ def load_seed_table(division: str, refresh: bool = False) -> pd.DataFrame:
                 }
             )
     current = pd.DataFrame(current_rows).drop_duplicates(["season", "team_id"])
-    return pd.concat([historical[["season", "team_id", "seed_code", "division", "seed_num", "seed_missing"]], current], ignore_index=True)
+    combined = pd.concat([historical[["season", "team_id", "seed_code", "division", "seed_num", "seed_missing"]], current], ignore_index=True)
+    combined.to_csv(path, index=False)
+    return combined
 
 
 def tournament_margin_scale(division: str) -> float:
@@ -277,6 +292,11 @@ def _parse_odds(matchup_row: pd.Series, sigma: float) -> tuple[float | None, int
 
 
 def build_market_lines_table(division: str, refresh: bool = False) -> pd.DataFrame:
+    path = _market_lines_path(division)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists() and not refresh:
+        return pd.read_csv(path)
+
     if refresh or _payload_path(division).exists():
         games = build_espn_bracket_games(division, refresh=refresh)
     else:
@@ -308,4 +328,6 @@ def build_market_lines_table(division: str, refresh: bool = False) -> pd.DataFra
                 "region_label": row.region_label,
             }
         )
-    return pd.DataFrame(rows).drop_duplicates(["season", "team_a", "team_b"])
+    frame = pd.DataFrame(rows).drop_duplicates(["season", "team_a", "team_b"])
+    frame.to_csv(path, index=False)
+    return frame
