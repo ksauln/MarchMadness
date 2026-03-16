@@ -465,7 +465,7 @@ with tabs[0]:
         inner_left, inner_right = st.columns([1.15, 0.85])
         with inner_left:
             st.subheader("Feature Edge")
-            st.dataframe(_top_feature_diffs(matchup_frame), use_container_width=True, hide_index=True)
+            st.dataframe(_top_feature_diffs(matchup_frame), width="stretch", hide_index=True)
         with inner_right:
             st.subheader("Team Snapshot")
             top25_lookup = {
@@ -487,9 +487,9 @@ with tabs[0]:
                     subset=[f"{pick_column} ★"],
                     **{"background-color": "rgba(21, 71, 52, 0.12)", "font-weight": "700"},
                 )
-                st.dataframe(styled_snapshot, use_container_width=True, hide_index=True)
+                st.dataframe(styled_snapshot, width="stretch", hide_index=True)
             else:
-                st.dataframe(snapshot, use_container_width=True, hide_index=True)
+                st.dataframe(snapshot, width="stretch", hide_index=True)
     else:
         st.info("Choose two different teams to inspect the matchup.")
 
@@ -503,7 +503,7 @@ with tabs[1]:
             display = simulation[["team_name", "title", "championship", "final_four", "elite_8"]].head(16).copy()
             for column in ("title", "championship", "final_four", "elite_8"):
                 display[column] = display[column].map(lambda value: f"{value:.1%}")
-            st.dataframe(display, use_container_width=True, hide_index=True)
+            st.dataframe(display, width="stretch", hide_index=True)
         with right:
             st.subheader("Live Bracket Matchups")
             official_games = _official_matchups_with_predictions(division, team_features, model_bundle)
@@ -521,14 +521,14 @@ with tabs[1]:
                     official_display["market_probability_a"] = official_display["market_probability_a"].map(
                         lambda value: f"{value:.1%}" if pd.notna(value) else "N/A"
                     )
-                st.dataframe(official_display, use_container_width=True, hide_index=True)
+                st.dataframe(official_display, width="stretch", hide_index=True)
 
 with tabs[2]:
     st.subheader("Rolling Validation")
     if not metrics.empty:
         chart_data = metrics.sort_values("season").set_index("season")[["brier_score", "log_loss", "accuracy"]]
         st.line_chart(chart_data)
-        st.dataframe(metrics.sort_values("season"), use_container_width=True, hide_index=True)
+        st.dataframe(metrics.sort_values("season"), width="stretch", hide_index=True)
     else:
         st.info("Validation metrics are not available.")
 
@@ -543,4 +543,4 @@ with tabs[3]:
         summary_cols[2].metric("Min Pred", f"{snapshot_row.min():.6f}")
         summary_cols[3].metric("Max Pred", f"{snapshot_row.max():.6f}")
         st.subheader("Current Submission Sample")
-        st.dataframe(submission_snapshot.head(20), use_container_width=True, hide_index=True)
+        st.dataframe(submission_snapshot.head(20), width="stretch", hide_index=True)
