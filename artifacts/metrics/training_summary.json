@@ -1,0 +1,87 @@
+{
+  "stage": 2,
+  "divisions": {
+    "M": {
+      "training_rows": 2898,
+      "seasons": [
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "cv_rows": 17,
+      "blend_weights": {
+        "logistic": 0.4,
+        "hist_gbm": 0.0,
+        "xgboost": 0.6
+      },
+      "selected_configs": {
+        "logistic": "balanced",
+        "hist_gbm": "patient",
+        "xgboost": "patient"
+      },
+      "calibration_strategy": "platt_logit",
+      "market_weight": 0.2,
+      "avg_brier_score": 0.1894431472129686,
+      "avg_log_loss": 0.5568706921834997,
+      "sim_title_favorite": "Duke",
+      "sim_title_probability": 0.1665
+    },
+    "W": {
+      "training_rows": 1922,
+      "seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "cv_rows": 10,
+      "blend_weights": {
+        "logistic": 0.58,
+        "hist_gbm": 0.08,
+        "xgboost": 0.34
+      },
+      "selected_configs": {
+        "logistic": "balanced",
+        "hist_gbm": "patient",
+        "xgboost": "patient"
+      },
+      "calibration_strategy": "platt_logit",
+      "market_weight": 0.2,
+      "avg_brier_score": 0.1490497294113011,
+      "avg_log_loss": 0.4478561358580729,
+      "sim_title_favorite": "Connecticut",
+      "sim_title_probability": 0.3876
+    }
+  },
+  "submission_path": "/Users/kyle/Documents/MyProjects/MarchMadness/artifacts/submissions/stage2_baseline_submission.csv"
+}

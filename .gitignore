@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtualenvs and local tooling
+.venv/
+.env
+.env.*
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# Internal agent/planning files
+.agents/
+.codex/
+AGENTS.md
+CODING_STANDARDS.md
+PROJECT_BRIEF.md
+STEPS_TO_GET_STARTED.md
+docs/
+tasks/
+
+# Build metadata
+build/
+dist/
+*.egg-info/
+
+# Local notebooks and editor state
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
+# Raw competition/training data stays local.
+# The deployed app can run from committed artifacts instead.
+Data/
+data/

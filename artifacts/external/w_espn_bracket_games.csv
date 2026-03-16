@@ -1,0 +1,68 @@
+season,division,round_id,bracket_location,region_label,game_id,status,status_detail,location,odds,team_one_id,team_one_name,team_one_seed,team_one_abbreviation,team_two_id,team_two_name,team_two_seed,team_two_abbreviation
+2026,W,0,1,Regional 2 - Sacramento,401859469,Scheduled,3/18 - 7:00 PM EDT,"Durham, NC",NEB -2.5,3304,Nebraska,11.0,NEB,3350,Richmond,11.0,RICH
+2026,W,0,2,Regional 3 - Fort Worth,401859470,Scheduled,3/18 - 9:00 PM EDT,"Austin, TX",MOST -2.5,3283,Missouri St,16.0,MOST,3372,SF Austin,16.0,SFA
+2026,W,0,3,Regional 4 - Sacramento,401859471,Scheduled,3/19 - 7:00 PM EDT,"Columbia, SC",SOU -2.5,3380,Southern,16.0,SOU,3359,Samford,16.0,SAM
+2026,W,0,4,Regional 4 - Sacramento,401859472,Scheduled,3/19 - 9:00 PM EDT,"Iowa City, IA",UVA -2.5,3438,Virginia,10.0,UVA,3113,Arizona St,10.0,ASU
+2026,W,1,1,Regional 1 - Fort Worth,401856503,Scheduled,3/21 - 3:00 PM EDT,"Storrs, CT",CONN -54.5,3163,UConn,1.0,CONN,3427,UTSA,16.0,UTSA
+2026,W,1,2,Regional 1 - Fort Worth,401856504,Scheduled,3/21 - 5:30 PM EDT,"Storrs, CT",ISU -7.5,3235,Iowa State,8.0,ISU,3393,Syracuse,9.0,SYR
+2026,W,1,3,Regional 1 - Fort Worth,401856468,Scheduled,3/20 - 3:00 PM EDT,"Chapel Hill, NC",MD -30.5,3268,Maryland,5.0,MD,3293,Murray St,12.0,MUR
+2026,W,1,4,Regional 1 - Fort Worth,401856467,Scheduled,3/20 - 5:30 PM EDT,"Chapel Hill, NC",UNC -25.5,3314,North Carolina,4.0,UNC,3442,W Illinois,13.0,WIU
+2026,W,1,5,Regional 1 - Fort Worth,401856517,Scheduled,3/21 - 2:00 PM EDT,"Columbus, OH",ND -7.5,3323,Notre Dame,6.0,ND,3193,Fairfield,11.0,FAIR
+2026,W,1,6,Regional 1 - Fort Worth,401856538,Scheduled,3/21 - 11:30 AM EDT,"Columbus, OH",OSU -37.5,3326,Ohio State,3.0,OSU,3224,Howard,14.0,HOW
+2026,W,1,7,Regional 1 - Fort Worth,401856506,Scheduled,3/21 - 9:30 PM EDT,"Nashville, TN",ILL -3.5,3228,Illinois,7.0,ILL,3160,Colorado,10.0,COLO
+2026,W,1,8,Regional 1 - Fort Worth,401856505,Scheduled,3/21 - 7:00 PM EDT,"Nashville, TN",VAN -36.5,3435,Vanderbilt,2.0,VAN,3219,High Point,15.0,HPU
+2026,W,1,9,Regional 4 - Sacramento,401856512,Scheduled,3/21 - 1:00 PM EDT,"Columbia, SC",,3376,South Carolina,1.0,SC,0,TBD,16.0,
+2026,W,1,10,Regional 4 - Sacramento,401856511,Scheduled,3/21 - 3:30 PM EDT,"Columbia, SC",USC -6.5,3155,Clemson,8.0,CLEM,3425,USC,9.0,USC
+2026,W,1,11,Regional 4 - Sacramento,401856500,Scheduled,3/20 - 7:30 PM EDT,"Norman, OK",MSU -18.5,3277,Michigan St,5.0,MSU,3161,Colorado St,12.0,CSU
+2026,W,1,12,Regional 4 - Sacramento,401856499,Scheduled,3/20 - 10:00 PM EDT,"Norman, OK",OU -34.5,3328,Oklahoma,4.0,OU,3225,Idaho,13.0,IDHO
+2026,W,1,13,Regional 4 - Sacramento,401856502,Scheduled,3/20 - 2:30 PM EDT,"Fort Worth, TX",WASH -5.5,3449,Washington,6.0,WASH,3355,S Dakota St,11.0,SDST
+2026,W,1,14,Regional 4 - Sacramento,401856501,Scheduled,3/20 - 12:00 PM EDT,"Fort Worth, TX",TCU -34.5,3395,TCU,3.0,TCU,3471,UC San Diego,14.0,UCSD
+2026,W,1,15,Regional 4 - Sacramento,401856510,Scheduled,3/21 - 1:30 PM EDT,"Iowa City, IA",,3208,Georgia,7.0,UGA,0,TBD,10.0,
+2026,W,1,16,Regional 4 - Sacramento,401856509,Scheduled,3/21 - 4:00 PM EDT,"Iowa City, IA",IOWA -29.5,3234,Iowa,2.0,IOWA,3192,FDU,15.0,FDU
+2026,W,1,17,Regional 2 - Sacramento,401856516,Scheduled,3/21 - 10:00 PM EDT,"Los Angeles, CA",UCLA -51.5,3417,UCLA,1.0,UCLA,3465,CA Baptist,16.0,CBU
+2026,W,1,18,Regional 2 - Sacramento,401856515,Scheduled,3/21 - 7:30 PM EDT,"Los Angeles, CA",OKST -5.5,3329,Oklahoma St,8.0,OKST,3343,Princeton,9.0,PRIN
+2026,W,1,19,Regional 2 - Sacramento,401856470,Scheduled,3/20 - 3:30 PM EDT,"Minneapolis, MN",MISS -12.5,3279,Ole Miss,5.0,MISS,3211,Gonzaga,12.0,GONZ
+2026,W,1,20,Regional 2 - Sacramento,401856469,Scheduled,3/20 - 6:00 PM EDT,"Minneapolis, MN",MINN -22.5,3278,Minnesota,4.0,MINN,3453,Green Bay,13.0,GB
+2026,W,1,21,Regional 2 - Sacramento,401856472,Scheduled,3/20 - 2:00 PM EDT,"Durham, NC",,3124,Baylor,6.0,BAY,0,TBD,11.0,
+2026,W,1,22,Regional 2 - Sacramento,401856471,Scheduled,3/20 - 11:30 AM EDT,"Durham, NC",DUKE -30.5,3181,Duke,3.0,DUKE,3158,Charleston,14.0,COFC
+2026,W,1,23,Regional 2 - Sacramento,401856473,Scheduled,3/20 - 8:30 PM EDT,"Baton Rouge, LA",TTU -1.5,3403,Texas Tech,7.0,TTU,3437,Villanova,10.0,VILL
+2026,W,1,24,Regional 2 - Sacramento,401856474,Scheduled,3/20 - 6:00 PM EDT,"Baton Rouge, LA",LSU -51.5,3261,LSU,2.0,LSU,3239,Jacksonville,15.0,JAX
+2026,W,1,25,Regional 3 - Fort Worth,401856475,Scheduled,3/20 - 4:00 PM EDT,"Austin, TX",,3400,Texas,1.0,TEX,0,TBD,16.0,
+2026,W,1,26,Regional 3 - Fort Worth,401856476,Scheduled,3/20 - 1:30 PM EDT,"Austin, TX",ORE -3.5,3332,Oregon,8.0,ORE,3439,Virginia Tech,9.0,VT
+2026,W,1,27,Regional 3 - Fort Worth,401856508,Scheduled,3/21 - 2:30 PM EDT,"Morgantown, WV",UK -14.5,3246,Kentucky,5.0,UK,3241,James Madison,12.0,JMU
+2026,W,1,28,Regional 3 - Fort Worth,401856507,Scheduled,3/21 - 5:00 PM EDT,"Morgantown, WV",WVU -25.5,3452,West Virginia,4.0,WVU,3275,Miami OH,13.0,M-OH
+2026,W,1,29,Regional 3 - Fort Worth,401856513,Scheduled,3/21 - 2:30 PM EDT,"Louisville, KY",URI -7.5,3104,Alabama,6.0,ALA,3348,Rhode Island,11.0,URI
+2026,W,1,30,Regional 3 - Fort Worth,401856514,Scheduled,3/21 - 12:00 PM EDT,"Louisville, KY",LOU -26.5,3257,Louisville,3.0,LOU,3436,Vermont,14.0,UVM
+2026,W,1,31,Regional 3 - Fort Worth,401856498,Scheduled,3/20 - 8:00 PM EDT,"Ann Arbor, MI",TENN -1.5,3301,NC State,7.0,NCSU,3397,Tennessee,10.0,TENN
+2026,W,1,32,Regional 3 - Fort Worth,401856477,Scheduled,3/20 - 5:30 PM EDT,"Ann Arbor, MI",MICH -40.5,3276,Michigan,2.0,MICH,3221,Holy Cross,15.0,HC
+2026,W,2,1,Regional 1 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,2,Regional 1 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,3,Regional 1 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,4,Regional 1 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,5,Regional 4 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,6,Regional 4 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,7,Regional 4 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,8,Regional 4 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,9,Regional 2 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,10,Regional 2 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,11,Regional 2 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,12,Regional 2 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,13,Regional 3 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,14,Regional 3 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,15,Regional 3 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,2,16,Regional 3 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,3,1,Regional 1 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,3,2,Regional 1 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,3,3,Regional 4 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,3,4,Regional 4 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,3,5,Regional 2 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,3,6,Regional 2 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,3,7,Regional 3 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,3,8,Regional 3 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,4,1,Regional 1 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,4,2,Regional 4 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,4,3,Regional 2 - Sacramento,,,,,,0,TBD,,,0,TBD,,
+2026,W,4,4,Regional 3 - Fort Worth,,,,,,0,TBD,,,0,TBD,,
+2026,W,5,1,Final Four Left,,,,,,0,TBD,,,0,TBD,,
+2026,W,5,2,Final Four Right,,,,,,0,TBD,,,0,TBD,,
+2026,W,6,1,Championship,,,,,,0,TBD,,,0,TBD,,

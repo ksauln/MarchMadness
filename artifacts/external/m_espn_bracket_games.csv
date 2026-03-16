@@ -1,0 +1,68 @@
+season,division,round_id,bracket_location,region_label,game_id,status,status_detail,location,odds,team_one_id,team_one_name,team_one_seed,team_one_abbreviation,team_two_id,team_two_name,team_two_seed,team_two_abbreviation
+2026,M,0,1,WEST,401856434,Scheduled,3/17 - 9:15 PM EDT,"Dayton, OH",NCSU -1.5,1301,NC State,11.0,NCSU,1400,Texas,11.0,TEX
+2026,M,0,2,MIDWEST,401856436,Scheduled,3/18 - 9:15 PM EDT,"Dayton, OH",SMU -7.5,1374,SMU,11.0,SMU,1275,Miami OH,11.0,M-OH
+2026,M,0,3,MIDWEST,401856435,Scheduled,3/17 - 6:40 PM EDT,"Dayton, OH",UMBC -2.5,1224,Howard,16.0,HOW,1420,UMBC,16.0,UMBC
+2026,M,0,4,SOUTH,401856437,Scheduled,3/18 - 6:40 PM EDT,"Dayton, OH",LEH -2.5,1250,Lehigh,16.0,LEH,1341,Prairie View,16.0,PV
+2026,M,1,1,EAST,401856478,Scheduled,3/19 - 2:50 PM EDT,"Greenville, SC",DUKE -29.5,1181,Duke,1.0,DUKE,1373,Siena,16.0,SIE
+2026,M,1,2,EAST,401856479,Scheduled,3/19 - 12:15 PM EDT,"Greenville, SC",OSU -2.5,1326,Ohio State,8.0,OSU,1395,TCU,9.0,TCU
+2026,M,1,3,EAST,401856494,Scheduled,3/20 - 7:10 PM EDT,"San Diego, CA",SJU -10.5,1385,St John's,5.0,SJU,1320,Northern Iowa,12.0,UNI
+2026,M,1,4,EAST,401856495,Scheduled,3/20 - 9:45 PM EDT,"San Diego, CA",KU -14.5,1242,Kansas,4.0,KU,1465,CA Baptist,13.0,CBU
+2026,M,1,5,EAST,401856482,Scheduled,3/19 - 1:30 PM EDT,"Buffalo, NY",LOU -5.5,1257,Louisville,6.0,LOU,1378,South Florida,11.0,USF
+2026,M,1,6,EAST,401856483,Scheduled,3/19 - 4:05 PM EDT,"Buffalo, NY",MSU -16.5,1277,Michigan St,3.0,MSU,1295,N Dakota St,14.0,NDSU
+2026,M,1,7,EAST,401856496,Scheduled,3/20 - 7:25 PM EDT,"Philadelphia, PA",UCLA -5.5,1417,UCLA,7.0,UCLA,1416,UCF,10.0,UCF
+2026,M,1,8,EAST,401856497,Scheduled,3/20 - 10:00 PM EDT,"Philadelphia, PA",CONN -20.5,1163,UConn,2.0,CONN,1202,Furman,15.0,FUR
+2026,M,1,9,SOUTH,401856523,Scheduled,3/20 - 9:25 PM EDT,"Tampa, FL",,1196,Florida,1.0,FLA,0,TBD,16.0,
+2026,M,1,10,SOUTH,401856522,Scheduled,3/20 - 6:50 PM EDT,"Tampa, FL",IOWA -2.5,1155,Clemson,8.0,CLEM,1234,Iowa,9.0,IOWA
+2026,M,1,11,SOUTH,401856488,Scheduled,3/19 - 3:15 PM EDT,"Oklahoma City, OK",VAN -11.5,1435,Vanderbilt,5.0,VAN,1270,McNeese,12.0,MCN
+2026,M,1,12,SOUTH,401856489,Scheduled,3/19 - 12:40 PM EDT,"Oklahoma City, OK",NEB -13.5,1304,Nebraska,4.0,NEB,1407,Troy,13.0,TROY
+2026,M,1,13,SOUTH,401856490,Scheduled,3/19 - 6:50 PM EDT,"Greenville, SC",UNC -2.5,1314,North Carolina,6.0,UNC,1433,VCU,11.0,VCU
+2026,M,1,14,SOUTH,401856491,Scheduled,3/19 - 9:25 PM EDT,"Greenville, SC",ILL -24.5,1228,Illinois,3.0,ILL,1335,Penn,14.0,PENN
+2026,M,1,15,SOUTH,401856492,Scheduled,3/19 - 7:35 PM EDT,"Oklahoma City, OK",SMC -2.5,1388,Saint Mary's,7.0,SMC,1401,Texas A&M,10.0,TA&M
+2026,M,1,16,SOUTH,401856493,Scheduled,3/19 - 10:10 PM EDT,"Oklahoma City, OK",HOU -24.5,1222,Houston,2.0,HOU,1225,Idaho,15.0,IDHO
+2026,M,1,17,WEST,401856529,Scheduled,3/20 - 1:35 PM EDT,"San Diego, CA",ARIZ -31.5,1112,Arizona,1.0,ARIZ,1254,Long Island,16.0,LIU
+2026,M,1,18,WEST,401856528,Scheduled,3/20 - 4:10 PM EDT,"San Diego, CA",USU -3.5,1437,Villanova,8.0,VILL,1429,Utah State,9.0,USU
+2026,M,1,19,WEST,401856480,Scheduled,3/19 - 1:50 PM EDT,"Portland, OR",WIS -9.5,1458,Wisconsin,5.0,WIS,1219,High Point,12.0,HPU
+2026,M,1,20,WEST,401856481,Scheduled,3/19 - 4:25 PM EDT,"Portland, OR",ARK -15.5,1116,Arkansas,4.0,ARK,1218,Hawai'i,13.0,HAW
+2026,M,1,21,WEST,401856484,Scheduled,3/19 - 7:25 PM EDT,"Portland, OR",,1140,BYU,6.0,BYU,0,TBD,11.0,
+2026,M,1,22,WEST,401856485,Scheduled,3/19 - 10:00 PM EDT,"Portland, OR",GONZ -20.5,1211,Gonzaga,3.0,GONZ,1244,Kennesaw St,14.0,KENN
+2026,M,1,23,WEST,401856518,Scheduled,3/20 - 10:10 PM EDT,"St. Louis, MO",MIA -1.5,1274,Miami,7.0,MIA,1281,Missouri,10.0,MIZ
+2026,M,1,24,WEST,401856519,Scheduled,3/20 - 7:35 PM EDT,"St. Louis, MO",PUR -24.5,1345,Purdue,2.0,PUR,1474,Queens,15.0,QUC
+2026,M,1,25,MIDWEST,401856486,Scheduled,3/19 - 7:10 PM EDT,"Buffalo, NY",,1276,Michigan,1.0,MICH,0,TBD,16.0,
+2026,M,1,26,MIDWEST,401856487,Scheduled,3/19 - 9:45 PM EDT,"Buffalo, NY",UGA -2.5,1208,Georgia,8.0,UGA,1387,Saint Louis,9.0,SLU
+2026,M,1,27,MIDWEST,401856520,Scheduled,3/20 - 12:40 PM EDT,"Tampa, FL",TTU -7.5,1403,Texas Tech,5.0,TTU,1103,Akron,12.0,AKR
+2026,M,1,28,MIDWEST,401856521,Scheduled,3/20 - 3:15 PM EDT,"Tampa, FL",ALA -14.5,1104,Alabama,4.0,ALA,1220,Hofstra,13.0,HOF
+2026,M,1,29,MIDWEST,401856527,Scheduled,3/20 - 4:25 PM EDT,"Philadelphia, PA",,1397,Tennessee,6.0,TENN,0,TBD,11.0,
+2026,M,1,30,MIDWEST,401856526,Scheduled,3/20 - 1:50 PM EDT,"Philadelphia, PA",UVA -18.5,1438,Virginia,3.0,UVA,1460,Wright St,14.0,WRST
+2026,M,1,31,MIDWEST,401856525,Scheduled,3/20 - 12:15 PM EDT,"St. Louis, MO",UK -4.5,1246,Kentucky,7.0,UK,1365,Santa Clara,10.0,SCU
+2026,M,1,32,MIDWEST,401856524,Scheduled,3/20 - 2:50 PM EDT,"St. Louis, MO",ISU -25.5,1235,Iowa State,2.0,ISU,1398,Tennessee St,15.0,TNST
+2026,M,2,1,EAST,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,2,EAST,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,3,EAST,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,4,EAST,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,5,SOUTH,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,6,SOUTH,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,7,SOUTH,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,8,SOUTH,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,9,WEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,10,WEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,11,WEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,12,WEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,13,MIDWEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,14,MIDWEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,15,MIDWEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,2,16,MIDWEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,3,1,EAST,,,,,,0,TBD,,,0,TBD,,
+2026,M,3,2,EAST,,,,,,0,TBD,,,0,TBD,,
+2026,M,3,3,SOUTH,,,,,,0,TBD,,,0,TBD,,
+2026,M,3,4,SOUTH,,,,,,0,TBD,,,0,TBD,,
+2026,M,3,5,WEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,3,6,WEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,3,7,MIDWEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,3,8,MIDWEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,4,1,EAST,,,,,,0,TBD,,,0,TBD,,
+2026,M,4,2,SOUTH,,,,,,0,TBD,,,0,TBD,,
+2026,M,4,3,WEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,4,4,MIDWEST,,,,,,0,TBD,,,0,TBD,,
+2026,M,5,1,Final Four Left,,,,,,0,TBD,,,0,TBD,,
+2026,M,5,2,Final Four Right,,,,,,0,TBD,,,0,TBD,,
+2026,M,6,1,Championship,,,,,,0,TBD,,,0,TBD,,
