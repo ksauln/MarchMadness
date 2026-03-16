@@ -39,5 +39,5 @@ dist/
 
 # Raw competition/training data stays local.
 # The deployed app can run from committed artifacts instead.
-Data/
-data/
+/Data/
+/data/
